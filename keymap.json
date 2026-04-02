@@ -1,0 +1,151 @@
+[
+  {
+    // РЕДАКТОР: форматирование, комментарии, быстрые фиксы =====
+    "context": "Editor && !menu",
+    "bindings": {
+      // Форматировать файл
+      "ctrl-alt-l": "editor::Format",
+      "cmd-alt-l": "editor::Format",
+
+      // Закомментировать/раскомментировать строку/выделение
+      "ctrl-/": "editor::ToggleComments",
+      "cmd-/": "editor::ToggleComments",
+
+      // Быстрые исправления / code actions
+      "alt-enter": "editor::ToggleCodeActions",
+
+      // Переименовать символ
+      "shift-f6": "editor::Rename",
+    },
+  },
+
+  {
+    // НАВИГАЦИЯ ПО КОДУ
+    "context": "Editor && !menu",
+    "bindings": {
+      // Перейти к определению
+      "ctrl-enter": "editor::GoToDefinition",
+      "cmd-enter": "editor::GoToDefinition",
+
+      // Перейти к определению в split
+      "ctrl-alt-b": "editor::GoToDefinitionSplit",
+      "cmd-alt-b": "editor::GoToDefinitionSplit",
+
+      // Перейти к реализации
+      "ctrl-shift-b": "editor::GoToImplementation",
+      "cmd-shift-b": "editor::GoToImplementation",
+
+      // Перейти к определению типа
+      "ctrl-alt-t": "editor::GoToTypeDefinition",
+      "cmd-alt-t": "editor::GoToTypeDefinition",
+
+      // Найти все использования
+      "alt-f7": "editor::FindAllReferences",
+    },
+  },
+
+  {
+    // ДИАГНОСТИКА
+    "context": "Editor && !menu",
+    "bindings": {
+      // Следующая проблема
+      "f2": "editor::GoToDiagnostic",
+
+      // Предыдущая проблема
+      "shift-f2": "editor::GoToPreviousDiagnostic",
+
+      // Открыть панель проблем/диагностики (Problems)
+      "alt-6": "diagnostics::Deploy",
+    },
+  },
+
+  {
+    // ПОИСК: в файле/панели
+    "context": "Workspace && !menu",
+    "bindings": {
+      // Поиск — в Zed разворачивает поиск в панели
+      "ctrl-f": "pane::DeploySearch",
+      "cmd-f": "pane::DeploySearch",
+    },
+  },
+
+  {
+    // ОТКРЫТИЕ: файлы/символы/последние проекты
+    "context": "Workspace && !menu",
+    "bindings": {
+      // Перейти к файлу
+      "ctrl-shift-n": "file_finder::Toggle",
+      "cmd-shift-o": "file_finder::Toggle",
+
+      // Перейти к символу в проекте
+      "ctrl-alt-shift-n": "project_symbols::Toggle",
+      "cmd-alt-o": "project_symbols::Toggle",
+
+      // Структура файла
+      "ctrl-f12": "outline::Toggle",
+      "cmd-f12": "outline::Toggle",
+
+      // Последние проекты
+      "ctrl-e": "projects::OpenRecent",
+    },
+  },
+
+  {
+    //ВКЛАДКИ/ФАЙЛЫ: переключение/закрытие/сохранение
+    "context": "Workspace && !menu",
+    "bindings": {
+      // Сохранить
+      "ctrl-s": "workspace::Save",
+      "cmd-s": "workspace::Save",
+
+      // Закрыть вкладку
+      "ctrl-f4": "pane::CloseActiveItem",
+      "cmd-w": "pane::CloseActiveItem",
+
+      // Следующая/предыдущая вкладка
+      "alt-right": "pane::ActivateNextItem",
+      "alt-left": "pane::ActivatePreviousItem",
+
+      // Закрыть остальные вкладки (Close Others)
+      "ctrl-alt-w": "pane::CloseOtherItems",
+      // Вернуться к предыдущей вкладке (аналог Reopen / Back)
+      "ctrl-alt-z": "pane::GoBack",
+
+      // Вперёд по истории
+      "ctrl-alt-shift-z": "pane::GoForward",
+    },
+  },
+
+  {
+    // ПАНЕЛИ: терминал
+    "context": "Workspace && !menu",
+    "bindings": {
+      // Терминал
+      "alt-f12": "terminal_panel::ToggleFocus",
+    },
+  },
+
+  {
+    // TASKS: запуск ближайшей задачи
+    "context": "Workspace && !menu",
+    "bindings": {
+      // Run  — запускаем ближайшую задачу, не уводя фокус
+      "shift-f10": ["editor::SpawnNearestTask", { "reveal": "no_focus" }],
+
+      // Debug — "показать" вывод задачи (reveal: always)
+      "shift-f9": ["editor::SpawnNearestTask", { "reveal": "always" }],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "f5": "task::Rerun",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-f5": "debugger::Rerun",
+    },
+  },
+]

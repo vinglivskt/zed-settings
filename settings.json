@@ -1,0 +1,429 @@
+{
+  // При запуске редактора автоматически открывается последний рабочий проект (workspace)
+  "vim": {
+    "gdefault": true,
+  },
+  "restore_on_startup": "last_workspace",
+  // Если файл был удалён на диске — вкладка с ним автоматически закрывается
+  "close_on_file_delete": true,
+  // Используется режим on_focus_change — файл сохраняется,
+  // когда фокус уходит с редактора или файла.
+  "autosave": "on_focus_change",
+  // Выполнять форматирование файла при сохранении
+  "format_on_save": "on",
+  // Разрешить использование встроенной интеграции Prettier
+  "prettier": {
+    "allowed": true,
+  },
+  // Загружать переменные окружения через direnv (.envrc)
+  // Удобно для проектов с виртуальными окружениями
+  "load_direnv": "direct",
+  "title_bar": {
+    // Показывать иконку текущей Git-ветки рядом с названием проекта
+    "show_branch_icon": true,
+  },
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": false,
+    "selections_menu": false,
+    "agent_review": false,
+    "code_actions": true,
+  },
+
+  // Настройки для AI-ассистента при редактировании кода
+  "agent": {
+    // Настройки разрешений на использование инструментов
+    "tool_permissions": {
+      "default": "confirm",
+      "tools": {
+        // Разрешение на редактирование файлов
+        "edit_file": {
+          "default": "confirm",
+        },
+        "delete_path": {
+          "default": "confirm",
+        },
+        "terminal": {
+          "default": "allow",
+        },
+      },
+    },
+
+    // Профиль по умолчанию
+    "default_profile": "write",
+
+    // Положение панели агента
+    "dock": "right",
+
+    // Основная модель агента:
+    // главный вариант для сложной работы с кодом, рефакторинга, анализа проекта
+    "default_model": {
+      "enable_thinking": false,
+      "provider": "openai",
+      "model": "gpt-5.4",
+    },
+
+    // Модель для inline-ассистента:
+    // быстрые локальные правки, небольшие генерации, объяснение куска кода
+    "inline_assistant_model": {
+      "enable_thinking": false,
+      "provider": "openai",
+      "model": "gpt-5.4",
+    },
+
+    // Альтернативные модели для inline-ассиста:
+    // Zed умеет показывать несколько вариантов ответа сразу
+    "inline_alternatives": [
+      {
+        "enable_thinking": false,
+        "provider": "openrouter",
+        "model": "qwen/qwen3-coder:free",
+      },
+      {
+        "enable_thinking": false,
+        "provider": "openrouter",
+        "model": "openai/gpt-oss-120b",
+      },
+    ],
+
+    // Модель для кратких описаний в Git blame / thread summary
+    "thread_summary_model": {
+      "enable_thinking": false,
+      "provider": "openrouter",
+      "model": "openai/gpt-oss-120b",
+    },
+
+    // Модель для генерации commit message
+    "commit_message_model": {
+      "enable_thinking": false,
+      "provider": "openrouter",
+      "model": "openai/gpt-oss-120b",
+    },
+
+    // Список избранных моделей для быстрого переключения
+    "favorite_models": [
+      {
+        "provider": "openrouter",
+        "model": "qwen/qwen3-coder:free",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "openai/gpt-oss-120b",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "qwen/qwen3-next-80b-a3b-instruct:free",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "nousresearch/hermes-3-llama-3.1-405b:free",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3-super-120b-a12b:free",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "z-ai/glm-4.5-air:free",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "stepfun/step-3.5-flash:free",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "arcee-ai/trinity-large-preview:free",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "arcee-ai/trinity-mini:free",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "openrouter",
+        "model": "openrouter/free",
+        "enable_thinking": false,
+      },
+    ],
+  },
+  // Настройки для AI-предсказаний при редактировании кода
+  "edit_predictions": {
+    "provider": "copilot",
+    "mode": "subtle",
+    "disabled_globs": [
+      "**/.env*",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/secrets.yml",
+      "**/.zed/settings.json",
+      "**/.zed/keymap.json",
+    ],
+    "copilot": {
+      "enable_next_edit_suggestions": false,
+    },
+    "enabled_in_text_threads": true,
+  },
+  // Использовать горячие клавиши как в JetBrains IDE (IntelliJ / PyCharm)
+  "base_keymap": "JetBrains",
+  // Курсор отображается в виде тонкой вертикальной линии
+  "cursor_shape": "bar",
+  // Подсвечивать текущую строку
+  "current_line_highlight": "line",
+  // Не показывать автоматически сигнатуры функций при наборе
+  "auto_signature_help": false,
+  // Не показывать сигнатуры после автодополнения
+  "show_signature_help_after_edits": false,
+  // Не позволять прокручивать файл ниже последней строки
+  "scroll_beyond_last_line": "off",
+  // Использовать субпиксельный рендеринг текста
+  // (повышает чёткость на LCD-экранах)
+  "text_rendering_mode": "subpixel",
+  "completions": {
+    // Если LSP не дал подсказку — использовать слова из текущего файла
+    "words": "fallback",
+    // Начинать предлагать word-completion уже с двух символов
+    "words_min_length": 2,
+    // При выборе подсказки заменять совпадающий суффикс слова
+    "lsp_insert_mode": "replace_suffix",
+  },
+  // Показывать пробелы и табы только для выделенного текста
+  "show_whitespaces": "selection",
+  // Переносить строки при превышении предпочтительной длины строки
+  "soft_wrap": "preferred_line_length",
+  // Предпочтительная длина строки
+  "preferred_line_length": 120,
+  // Вертикальная направляющая на 120 символах
+  "wrap_guides": [120],
+  // Раскрашивать скобки разными цветами
+  "colorize_brackets": true,
+  "indent_guides": {
+    // Раскрашивать уровни отступов разными цветами
+    "coloring": "indent_aware",
+  },
+  // Отключить автоматическое форматирование при вводе
+  // (часто конфликтует с Ruff / Pyright)
+  "use_on_type_format": false,
+  "project_panel": {
+    // Не объединять цепочки одиночных папок в одну строку
+    "auto_fold_dirs": false,
+    // Показывать обычные иконки папок
+    "folder_icons": true,
+    // Показывать иконки файлов
+    "file_icons": true,
+    // Более компактный вертикальный отступ между элементами
+    "entry_spacing": "standard",
+  },
+  "tabs": {
+    // Показывать Git-статус файла на вкладке
+    "git_status": true,
+    // Показывать иконки файлов
+    "file_icons": true,
+    // Показывать индикаторы ошибок
+    "show_diagnostics": "errors",
+    // Кнопка закрытия вкладки всегда видна
+    "show_close_button": "always",
+  },
+  "preview_tabs": {
+    // Файлы из file finder открываются как preview-вкладки
+    "enable_preview_from_file_finder": true,
+  },
+  "scrollbar": {
+    // Показывать скроллбар только при необходимости
+    "show": "auto",
+    // Показывать маркеры диагностики до уровня info
+    "diagnostics": "information",
+  },
+  // Полностью отключить minimap
+  "minimap": {
+    "show": "never",
+  },
+  // Если определение не найдено — выполнить поиск всех ссылок
+  "go_to_definition_fallback": "find_all_references",
+  // Если в поиске есть заглавные буквы — поиск становится чувствительным к регистру
+  "use_smartcase_search": true,
+  // Использовать выделенный текст как начальный запрос поиска
+  "seed_search_query_from_cursor": "selection",
+  "search": {
+    // При переходе к совпадению центрировать строку в окне
+    "center_on_match": true,
+  },
+  // Использовать одновременно tree-sitter и LSP для подсветки
+  "semantic_tokens": "combined",
+  // Использовать LSP для отображения структуры файла
+  "document_symbols": "on",
+  // Использовать LSP для folding диапазонов
+  "document_folding_ranges": "on",
+  // Показывать все уровни диагностики
+  "diagnostics_max_severity": null,
+  "diagnostics": {
+    "inline": {
+      // Показывать ошибки справа от строки
+      "enabled": true,
+      // Inline diagnostics показывают только предупреждения и ошибки, игнорируя информационные сообщения
+      "max_severity": "warning",
+      // Начинать отображение после 120 символа
+      "min_column": 120,
+    },
+  },
+  "status_bar": {
+    // Показывать кнопку переключения окончания строк (LF / CRLF)
+    "line_endings_button": true,
+  },
+  // Отключить inlay hints, так как они могут перегружать интерфейс и конфликтовать с подсказками от LSP
+  "inlay_hints": {
+    "enabled": false,
+    "toggle_on_modifiers_press": {
+      "alt": true,
+    },
+  },
+
+  // Настройки для конкретных языков программирования
+  "languages": {
+    // Разрешить форматирование JSON через Prettier, так как он хорошо работает с этим форматом
+    "JSON": {
+      "prettier": {
+        "allowed": true,
+        "parser": "json",
+      },
+      "always_treat_brackets_as_autoclosed": true,
+      "indent_guides": {
+        "background_coloring": "disabled",
+      },
+      "use_on_type_format": true,
+    },
+    // Отключить форматирование TOML через Prettier, так как он может конфликтовать с настройками от Ruff
+    "TOML": {
+      "format_on_save": "off",
+      "prettier": {
+        "allowed": false,
+      },
+    },
+    // Настройки для Python-файлов
+    "Python": {
+      // Использовать и tree-sitter, и LSP для подсветки
+      "semantic_tokens": "combined",
+      // Сначала basedpyright для навигации, типов и go to definition,
+      // затем Ruff для диагностики, автоисправлений и форматирования
+      "language_servers": ["basedpyright", "ruff"],
+      // Форматировать файл при сохранении
+      "format_on_save": "on",
+      // Выполнять действия Ruff при форматировании
+      "code_actions_on_format": {
+        // Сортировать импорты
+        "source.organizeImports.ruff": true,
+        // Исправлять автоматически исправимые нарушения
+        "source.fixAll.ruff": true,
+      },
+      // Само форматирование выполнять через Ruff language server
+      "formatter": {
+        "language_server": {
+          "name": "ruff",
+        },
+      },
+      // Отступы Python
+      "tab_size": 4,
+      "hard_tabs": false,
+    },
+  },
+  // Настройки для конкретных language server (LSP)
+  "lsp": {
+    "codebook": {
+      "initialization_options": {
+        "diagnosticSeverity": "hint",
+      },
+    },
+    "ruff": {
+      "initialization_options": {
+        "settings": {
+          // Предпочитать настройки редактора, если они заданы
+          "configurationPreference": "editorFirst",
+          // Показывать синтаксические ошибки
+          "showSyntaxErrors": true,
+          "lineLength": 120,
+          "lint": {
+            "select": ["E4", "E7", "E9", "F", "I"],
+            "ignore": ["E501"],
+          },
+        },
+      },
+    },
+    "basedpyright": {
+      "settings": {
+        "python.analysis": {
+          // Анализировать весь workspace
+          "diagnosticMode": "workspace",
+          // Базовый режим проверки типов
+          "typeCheckingMode": "basic",
+          // Автоматически искать пути для импортов
+          "autoSearchPaths": true,
+          // Включить автодополнение импортов
+          "autoImportCompletions": true,
+          // Использовать код библиотек для извлечения типов
+          "useLibraryCodeForTypes": true,
+        },
+      },
+    },
+  },
+  "terminal": {
+    "detect_venv": {
+      "on": {
+        // Директории поиска виртуального окружения Python
+        "directories": [".venv", "venv", ".env", "env", ".pypoetry", ".hatch"],
+        "activate_script": "default",
+      },
+    },
+    // Если вызывается git commit — открывать редактор Zed
+    "env": {
+      "EDITOR": "zed --wait",
+    },
+  },
+  // Скрывать файлы с чувствительной информацией
+  "private_files": ["**/.env*", "**/*.pem", "**/*.key", "**/*.cert", "**/*.crt", "**/secrets.yml"],
+  // Скрывать значения переменных в приватных файлах
+  "redact_private_values": false,
+  "debugger": {
+    "dock": "bottom",
+    "stepping_granularity": "line",
+  },
+  "auto_update_extensions": {
+    "colored-zed-icons-theme": true,
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "git": {
+    "inline_blame": {
+      // Показывать краткое описание коммита рядом со строкой
+      "show_commit_summary": true,
+    },
+    // Показывать изменения Git в gutter только для отслеживаемых файлов
+    "git_gutter": "tracked_files",
+  },
+  // Тема иконок файлов
+  "icon_theme": "Material Icon Theme",
+  // Цветовая тема интерфейса
+  "theme": "One Dark Pycharm Matched",
+  // Шрифт редактора
+  "buffer_font_family": "JetBrains Mono",
+  // Шрифт интерфейса
+  "ui_font_family": ".ZedSans",
+  // Размер шрифта интерфейса
+  "ui_font_size": 15,
+  // Размер шрифта кода
+  "buffer_font_size": 13,
+  // Межстрочный интервал
+  "buffer_line_height": {
+    "custom": 2.0,
+  },
+}
