@@ -506,11 +506,7 @@
     "mode": "subtle",
     // Список glob-паттернов, для которых предсказания отключены.
     // Добавляются к стандартному списку Zed.
-    "disabled_globs": [
-      "**/.env*",
-      "**/*.pem",
-      "**/*.key", "**/*.cert", "**/*.crt", "**/secrets.yml"
-    ],
+    "disabled_globs": ["**/.env*", "**/*.pem", "**/*.key", "**/*.cert", "**/*.crt", "**/secrets.yml"],
     // Настройки Copilot (если используется).
     "copilot": {
       "enable_next_edit_suggestions": false
@@ -614,7 +610,7 @@
     // Цветовое затемнение фона между уровнями отступов.
     // "disabled" — не затемнять.
     // "indent_aware" — затемнять с учётом уровня вложенности (радужная индикация).
-    "background_coloring": "indent_aware",
+    "background_coloring": "disabled",
     // Цветовая схема направляющих.
     // "fixed" — один цвет для всех уровней.
     // "indent_aware" — разные цвета для разных уровней (радужная индикация).
@@ -995,7 +991,7 @@
 
       // Направляющие отступов.
       "indent_guides": {
-        "background_coloring": "indent_aware",
+        "background_coloring": "disabled",
         "coloring": "indent_aware"
       },
 
