@@ -7,6 +7,23 @@
   // Включите, если используете вспомогательные технологии или хотите улучшить
   // доступность интерфейса для всех участников команды.
   // По умолчанию: false
+  "agent_servers": {
+    "gemini": {
+      "type": "registry"
+    },
+    "glm-acp-agent": {
+      "type": "registry"
+    },
+    "cursor": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "default_config_options": {
+        "model": "gpt-5.4-mini"
+      },
+      "type": "registry"
+    }
+  },
   "accessible_mode": true,
 
   // Поведение Zed при запуске.
@@ -142,6 +159,37 @@
   "agent": {
     // Позиция боковой панели агента: "left" или "right".
     // "right" — не мешает основному коду, удобно для широких экранов.
+    "favorite_models": [
+      {
+        "provider": "openrouter",
+        "model": "minimax/minimax-m3:free",
+        "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "poolside/laguna-s-2.1:free",
+        "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+        "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "openrouter/free",
+        "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "z-ai/glm-5.2:free",
+        "enable_thinking": true
+      }
+    ],
+    "sandbox_permissions": {
+      "allow_all_hosts": true,
+      "allow_unsandboxed": false
+    },
     "sidebar_side": "right",
 
     // Позиция док-панели агента: "left", "right" или "bottom".
@@ -158,8 +206,8 @@
     // "model": "claude-3-5-sonnet-20241022" — конкретная модель.
     "default_model": {
       "enable_thinking": true,
-      "provider": "anthropic",
-      "model": "claude-3-5-sonnet-20241022"
+      "provider": "openrouter",
+      "model": "openrouter/free"
     },
 
     // Модель для inline-ассистента (быстрые правки, объяснение кода).
@@ -168,30 +216,15 @@
     "inline_assistant_model": {
       "enable_thinking": false,
       "provider": "openrouter",
-      "model": "google/gemini-2.0-flash-thinking"
+      "model": "minimax/minimax-m2.7:free"
     },
-
-    // Альтернативные модели для inline-ассистента.
-    // Zed может показывать несколько вариантов ответа одновременно.
-    "inline_alternatives": [
-      {
-        "enable_thinking": false,
-        "provider": "openrouter",
-        "model": "qwen/qwen3-coder:free"
-      },
-      {
-        "enable_thinking": false,
-        "provider": "openrouter",
-        "model": "openai/gpt-oss-120b"
-      }
-    ],
 
     // Модель для кратких описаний в Git blame и thread summary.
     // Используется для генерации кратких описаний коммитов и сводок потоков.
     "thread_summary_model": {
       "enable_thinking": false,
       "provider": "openrouter",
-      "model": "openai/gpt-oss-120b"
+      "model": "minimax/minimax-m2.7:free"
     },
 
     // Модель для генерации сообщений коммитов Git.
@@ -199,30 +232,13 @@
     "commit_message_model": {
       "enable_thinking": false,
       "provider": "openrouter",
-      "model": "openai/gpt-oss-120b"
+      "model": "minimax/minimax-m2.7:free"
     },
 
     // Инструкции для генерации сообщений коммитов.
     // Используйте формат Conventional Commits для стандартизированных коммитов.
     // Пример: "feat(api): add user authentication endpoint"
-    "commit_message_instructions": "Use Conventional Commits format: <type>(<scope>): <description>. Types: feat, fix, docs, style, refactor, test, chore. Scope: api, db, auth, config, etc.",
-
-    // Автоматическая компактизация длинных потоков диалогов.
-    // "enabled": true — включить автоматическую компактизацию.
-    // "threshold": "85%" — компонтировать при достижении 85% контекстного окна.
-    // Можно также использовать абсолютные значения: 100000 (токенов) или -20000 (остаток).
-    "auto_compact": {
-      "enabled": true,
-      "threshold": "85%"
-    },
-
-    // Модель для компактизации (суммаризации) потоков.
-    // Используется для /compact и автоматической компактизации.
-    // Рекомендуется использовать более лёгкую модель для экономии токенов.
-    "compaction_model": {
-      "provider": "openrouter",
-      "model": "google/gemini-2.0-flash"
-    },
+    "commit_message_instructions": "Формат: <type>(<scope>): <description>. Пиши на русском языке, строчными буквами, без точки в конце. type: feat, fix, docs, style, refactor, test, chore. scope — по названию модуля или фичи. description — в прошедшем времени от первого лица единственного числа (добавил, исправил, обновил, убрал, перенес). Кратко, по факту, что конкретно сделано. Без инфинитивов, без воды, без домыслов. Если есть breaking changes — добавь строку: BREAKING CHANGE: <что изменилось и как мигрировать>.",
 
     // Уведомление при ожидании агента.
     // "primary_screen" — показывать на основном экране.
@@ -239,56 +255,6 @@
     // Показывать inline diff для правок агента в активном буфере.
     // Позволяет быстро просматривть изменения, внесённые агентом.
     "single_file_review": true,
-
-    // Параметры моделей (temperature) для разных провайдеров.
-    // Низкая temperature (0.2-0.3) — более детерминированный вывод (для кодинга).
-    // Высокая temperature (0.7-0.8) — более творческий вывод (для анализа).
-    // Zed проверяет правила с конца в начало, поэтому более специфичные правила ставьте позже.
-    "model_parameters": [
-      {
-        "provider": "anthropic",
-        "temperature": 0.3
-      },
-      {
-        "provider": "openrouter",
-        "temperature": 0.4
-      }
-    ],
-
-    // Список избранных моделей для быстрого переключения в интерфейсе.
-    // Добавляйте модели, которые часто используете.
-    "favorite_models": [
-      {
-        "provider": "openrouter",
-        "model": "qwen/qwen3-next-80b-a3b-instruct:free",
-        "enable_thinking": false
-      },
-      {
-        "provider": "openrouter",
-        "model": "nvidia/nemotron-3-super-120b-a12b:free",
-        "enable_thinking": false
-      },
-      {
-        "provider": "openrouter",
-        "model": "z-ai/glm-4.5-air:free",
-        "enable_thinking": false
-      },
-      {
-        "provider": "openrouter",
-        "model": "openrouter/free",
-        "enable_thinking": false
-      },
-      {
-        "provider": "openrouter",
-        "model": "openai/gpt-oss-120b:free",
-        "enable_thinking": true
-      },
-      {
-        "provider": "openrouter",
-        "model": "openrouter/owl-alpha",
-        "enable_thinking": false
-      }
-    ],
 
     // Профили агента — предустановленные конфигурации с ограничениями на инструменты.
     // Позволяют контролировать, какие действия может выполнять агент.
@@ -341,8 +307,8 @@
         },
         "enable_all_context_servers": true,
         "default_model": {
-          "provider": "anthropic",
-          "model": "claude-3-5-sonnet-20241022"
+          "provider": "openrouter",
+          "model": "z-ai/glm-5.2:free"
         }
       },
       // Профиль "Debug" — доступ к терминалу и запуску команд для отладки.
@@ -370,7 +336,7 @@
         "enable_all_context_servers": false,
         "default_model": {
           "provider": "openrouter",
-          "model": "google/gemini-2.0-flash-thinking"
+          "model": "z-ai/glm-5.2:free"
         }
       }
     },
@@ -393,9 +359,6 @@
             {
               "pattern": "^(python|pytest|pip|uv|poetry|docker|docker-compose)\\s+.*"
             },
-            {
-              "pattern": "^(git\\s+(add|commit|diff|log|status|push|pull|branch))"
-            }
           ],
           // Команды, которые всегда запрещены.
           "always_deny": [
@@ -570,7 +533,7 @@
 
     // Минимальная длина запроса для word-based автодополнения.
     // Чем меньше, тем раньше появляются подсказки.
-    "words_min_length": 1,
+    "words_min_length": 2,
 
     // Как заменять текст при выборе автодополнения из LSP.
     // "insert" — вставлять текст перед курсором.
@@ -669,7 +632,7 @@
     "file_icons": true,
 
     // Интервал между элементами: "comfortable" или "standard".
-    "entry_spacing": "standard",
+    "entry_spacing": "comfortable",
 
     // Ширина панели по умолчанию (в пикселях).
     "default_width": 240,
@@ -895,7 +858,7 @@
   // Предварительно настроены для: Go, Rust, TypeScript, Svelte.
   "inlay_hints": {
     // Включить inlay hints.
-    "enabled": false,
+    "enabled": true,
 
     // Показывать ли типы переменных.
     "show_type_hints": true,
@@ -917,7 +880,7 @@
 
     // Переключать hints при нажатии модификатора.
     "toggle_on_modifiers_press": {
-      "alt": true
+      "platform": true
     }
   },
 
@@ -987,7 +950,7 @@
       "soft_wrap": "bounded",
 
       // Отображение пробельных символов.
-      "show_whitespaces": "boundary",
+      "show_whitespaces": "none",
 
       // Направляющие отступов.
       "indent_guides": {

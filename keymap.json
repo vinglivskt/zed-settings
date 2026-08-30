@@ -12,7 +12,7 @@
       "cmd-/": "editor::ToggleComments",
 
       // Быстрые исправления / code actions
-      "alt-enter": "editor::ToggleCodeActions",
+      "cmd-return": "editor::ToggleInlayHints",
 
       // Переименовать символ
       "shift-f6": "editor::Rename",
