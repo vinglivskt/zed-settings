@@ -8,6 +8,15 @@
   // доступность интерфейса для всех участников команды.
   // По умолчанию: false
   "agent_servers": {
+    "opencode": {
+      "default_config_options": {
+        "model": "opencode/big-pickle"
+      },
+      "favorite_config_option_values": {
+        "model": ["kilo/minimax/minimax-m3:free", "opencode/big-pickle"]
+      },
+      "type": "registry"
+    },
     "gemini": {
       "type": "registry"
     },
@@ -19,7 +28,7 @@
     },
     "codex-acp": {
       "default_config_options": {
-        "model": "gpt-5.4-mini"
+        "model": "gpt-5.6-terra"
       },
       "type": "registry"
     }
@@ -184,6 +193,21 @@
         "provider": "openrouter",
         "model": "z-ai/glm-5.2:free",
         "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "minimax/minimax-m2.7:free",
+        "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "inclusionai/ling-3.0-flash-fin:free",
+        "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "enable_thinking": true
       }
     ],
     "sandbox_permissions": {
@@ -205,9 +229,9 @@
     // "provider": "anthropic" — провайдер модели (anthropic, openai, openrouter, ollama и др.).
     // "model": "claude-3-5-sonnet-20241022" — конкретная модель.
     "default_model": {
-      "enable_thinking": true,
-      "provider": "openrouter",
-      "model": "openrouter/free"
+      "enable_thinking": false,
+      "provider": "opencode",
+      "model": "go/minimax-m3"
     },
 
     // Модель для inline-ассистента (быстрые правки, объяснение кода).
@@ -232,7 +256,7 @@
     "commit_message_model": {
       "enable_thinking": false,
       "provider": "openrouter",
-      "model": "minimax/minimax-m2.7:free"
+      "model": "openrouter/free"
     },
 
     // Инструкции для генерации сообщений коммитов.
@@ -278,8 +302,8 @@
           "go_to_file": true,
           "set_context": true,
           "set_files": true,
-          "spawn_agent": false,
-          "create_task": false
+          "spawn_agent": true,
+          "create_task": true
         },
         "enable_all_context_servers": true
       },
@@ -288,34 +312,6 @@
         "name": "Code Review",
         "tools": {
           "edit_file": false,
-          "create_file": false,
-          "delete_file": false,
-          "rename_file": false,
-          "find_file": true,
-          "terminal": false,
-          "search": true,
-          "fetch": true,
-          "run_command": false,
-          "copy_path": true,
-          "move_path": false,
-          "open_file": true,
-          "go_to_file": true,
-          "set_context": true,
-          "set_files": true,
-          "spawn_agent": false,
-          "create_task": false
-        },
-        "enable_all_context_servers": true,
-        "default_model": {
-          "provider": "openrouter",
-          "model": "z-ai/glm-5.2:free"
-        }
-      },
-      // Профиль "Debug" — доступ к терминалу и запуску команд для отладки.
-      "debug": {
-        "name": "Debug",
-        "tools": {
-          "edit_file": true,
           "create_file": false,
           "delete_file": false,
           "rename_file": false,
@@ -333,7 +329,35 @@
           "spawn_agent": true,
           "create_task": false
         },
-        "enable_all_context_servers": false,
+        "enable_all_context_servers": true,
+        "default_model": {
+          "provider": "openrouter",
+          "model": "z-ai/glm-5.2:free"
+        }
+      },
+      // Профиль "Debug" — доступ к терминалу и запуску команд для отладки.
+      "debug": {
+        "name": "Debug",
+        "tools": {
+          "edit_file": true,
+          "create_file": true,
+          "delete_file": false,
+          "rename_file": true,
+          "find_file": true,
+          "terminal": true,
+          "search": true,
+          "fetch": true,
+          "run_command": true,
+          "copy_path": true,
+          "move_path": true,
+          "open_file": true,
+          "go_to_file": true,
+          "set_context": true,
+          "set_files": true,
+          "spawn_agent": true,
+          "create_task": true
+        },
+        "enable_all_context_servers": true,
         "default_model": {
           "provider": "openrouter",
           "model": "z-ai/glm-5.2:free"
@@ -624,9 +648,6 @@
 
     // Автоматически складывать директории с одной вложенной папкой.
     "auto_fold_dirs": false,
-
-    // Показывать иконки папок.
-    "folder_icons": true,
 
     // Показывать иконки файлов.
     "file_icons": true,
@@ -943,8 +964,8 @@
       "tab_size": 4,
       "hard_tabs": false,
 
-      // Длина строки: 88 (стандарт Black).
-      "preferred_line_length": 88,
+      // Длина строки: 120 (стандарт Black).
+      "preferred_line_length": 120,
 
       // Перенос строк по preferred_line_length.
       "soft_wrap": "bounded",
@@ -1192,7 +1213,7 @@
     // Показывать иконки файлов.
     "file_icons": true,
     // Древовидый вид.
-    "tree_view": false,
+    "tree_view": true,
     // Сворачивать незатрекенные файлы в diff.
     "collapse_untracked_diff": false
   },
