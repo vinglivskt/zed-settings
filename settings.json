@@ -979,10 +979,13 @@
 
       // Inlay hints для Python.
       "inlay_hints": {
-        "enabled": true,
+        "enabled": false,
         "show_type_hints": true,
         "show_parameter_hints": true,
-        "show_other_hints": true
+        "show_other_hints": true,
+        "toggle_on_modifiers_press": {
+          "platform": true
+        }
       }
     },
 
