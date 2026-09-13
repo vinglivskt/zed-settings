@@ -6,33 +6,6 @@
   // Режим доступности — улучшает навигацию с клавиатуры и поддержку скринридеров.
   // Включите, если используете вспомогательные технологии или хотите улучшить
   // доступность интерфейса для всех участников команды.
-  // По умолчанию: false
-  "agent_servers": {
-    "opencode": {
-      "default_config_options": {
-        "model": "opencode/big-pickle"
-      },
-      "favorite_config_option_values": {
-        "model": ["kilo/minimax/minimax-m3:free", "opencode/big-pickle"]
-      },
-      "type": "registry"
-    },
-    "gemini": {
-      "type": "registry"
-    },
-    "glm-acp-agent": {
-      "type": "registry"
-    },
-    "cursor": {
-      "type": "registry"
-    },
-    "codex-acp": {
-      "default_config_options": {
-        "model": "gpt-5.6-terra"
-      },
-      "type": "registry"
-    }
-  },
   "accessible_mode": true,
 
   // Поведение Zed при запуске.
@@ -46,7 +19,6 @@
   // Автоматически закрывать вкладки, когда соответствующие файлы удаляются с диска.
   // Особенно полезно для временных файлов, скриптов и файлов, создаваемых внешними процессами.
   // Внимание: файлы с несохранёнными изменениями НЕ будут закрываться автоматически.
-  // По умолчанию: false
   "close_on_file_delete": true,
 
   // Настройки автоматического сохранения файлов.
@@ -162,7 +134,32 @@
   // ============================================================================
   // AI-АГЕНТ
   // ============================================================================
-
+  "agent_servers": {
+    "opencode": {
+      "default_config_options": {
+        "model": "opencode/big-pickle"
+      },
+      "favorite_config_option_values": {
+        "model": ["kilo/minimax/minimax-m3:free", "opencode/big-pickle"]
+      },
+      "type": "registry"
+    },
+    "gemini": {
+      "type": "registry"
+    },
+    "glm-acp-agent": {
+      "type": "registry"
+    },
+    "cursor": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "default_config_options": {
+        "model": "gpt-5.6-terra"
+      },
+      "type": "registry"
+    }
+  },
   // Настройки AI-ассистента Zed. Открывается через Cmd+Shift+A (macOS) или Ctrl+Shift+A (Linux/Windows).
   // Подробнее: https://zed.dev/docs/ai/agent-settings
   "agent": {
@@ -214,6 +211,7 @@
       "allow_all_hosts": true,
       "allow_unsandboxed": false
     },
+
     "sidebar_side": "right",
 
     // Позиция док-панели агента: "left", "right" или "bottom".
